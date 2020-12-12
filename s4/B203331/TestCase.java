@@ -47,6 +47,35 @@ public class TestCase {
 	    if(4 != freq) {System.out.println("frequency() for Hi_Ho_Hi_Ho, should return 4, when taget is H. But it returns "+freq); c++; }
 
 	    // Write your testCase here
+	    // nospace
+	    myObject = new Frequencer();
+	    myObject.setSpace("".getBytes());
+	    myObject.setTarget("H".getBytes());
+	    freq = myObject.frequency();
+	    if(0 != freq) {System.out.println("frequency() for "", should return 0, when target is H. But it returns "+freq); c++; }
+	
+	    //notarget
+	    myObject = new Frequencer();
+	    myObject.setSpace("hoge".getBytes());
+	    myObject.setTarget("".getBytes());
+	    freq = myObject.frequency();
+	    if(-1 != freq) {System.out.println("frequency() for hoge, should return -1, when target is H. But it returns "+freq); c++; }
+		
+	    //subByteFrequency
+	    myObject = new Frequencer();
+	    myObject.setSpace("I am Jason Statham".getBytes());
+	    myObject.setTarget("m".getBytes());
+	    freq = myObject.frequency();
+	    subbytefreq = myObject.subByteFrequency(0,7);
+	    if(1 != subfreq) {System.out.println("frequency() for I am Jason Statham, should return 1, when target is m. But it returns "+freq); c++; }
+		
+	    // For the incorrect value of START or END, the behavior is undefined.
+	    myObject = new Frequencer();
+	    myObject.setSpace("I am Jason Statham".getBytes());
+	    myObject.setTarget("m".getBytes());
+	    freq = myObject.frequency();
+	    subbytefreq = myObject.subByteFrequency(-10,100);
+	    if(-1 != subfreq) {System.out.println("frequency() for I am Jason Statham, should return -1, when target is m. But it returns "+freq); c++; }
 
 	}
 	catch(Exception e) {
