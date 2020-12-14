@@ -130,6 +130,17 @@ public class TestCase {
 	    myObject.setTarget("00".getBytes());
 	    value = myObject.estimation();
 	    if((value < 3.9999) || (4.0001 <value)) { System.out.println("IQ for 00 in 3210321001230123 should be 4.0. But it returns "+value); c++; }
+
+		// targetの長さが0のときに0.0が返されない
+	    myObject.setTarget("".getBytes());
+	    value = myObject.estimation();
+		if((value < -0.0001) || (0.0001 <value)) { System.out.println("IQ for Target none in 3210321001230123 should be 0.0. But it returns "+value); c++; }
+
+		// spaceが設定されていないときにDouble.MAX_VALUEが返されず例外が発生する
+		InformationEstimatorInterface test = new InformationEstimator();
+		test.setTarget("0".getBytes());
+		value = test.estimation();
+		if((value < Double.MAX_VALUE) || (Double.MAX_VALUE <value)) { System.out.println("IQ for 0 in Space none should be Double.MAX_VALUE. But it returns "+value); c++; }
 	}
 	catch(Exception e) {
 	    System.out.println("Exception occurred in InformationEstimator Object");
