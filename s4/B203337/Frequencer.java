@@ -70,8 +70,8 @@ public class Frequencer implements FrequencerInterface{
 
         // ここにコードを記述せよ
         //
-        String suffix_i = Arrays.copyOfRange(mySpace, i, mySpace.length).toString();
-        String suffix_j = Arrays.copyOfRange(mySpace, j, mySpace.length).toString();
+        String suffix_i = new String(Arrays.copyOfRange(mySpace, i, mySpace.length));
+        String suffix_j = new String(Arrays.copyOfRange(mySpace, j, mySpace.length));
         int compare_result = suffix_i.compareTo(suffix_j);
         if (compare_result > 0) {
             return 1;
@@ -110,12 +110,12 @@ public class Frequencer implements FrequencerInterface{
         //   suffixArray[ 2]= 0:CBA
         // のようになるべきである。
 
-        for (int i = suffixArray.length - 1; i > 0; i--) {
-            for (int j = 0; j < i; j++) {
-                if (suffixCompare(j, j + 1) == 1) {
-                    int tmp = suffixArray[j];
-                    suffixArray[j] = suffixArray[j + 1];
-                    suffixArray[j + 1] = tmp;
+        for (int i = 0; i < suffixArray.length - 1; i++) {
+            for (int j = suffixArray.length - 1; j > i; j--) {
+                if (suffixCompare(suffixArray[j-1], suffixArray[j]) == 1) {
+                    int tmp = suffixArray[j - 1];
+                    suffixArray[j - 1] = suffixArray[j];
+                    suffixArray[j] = tmp;
                 }
             }
         }
