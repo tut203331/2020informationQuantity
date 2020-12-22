@@ -52,7 +52,8 @@ public class TestCase {
 	    myObject.setSpace("".getBytes());
 	    myObject.setTarget("H".getBytes());
 	    freq = myObject.frequency();
-	    if(0 != freq) {System.out.println("frequency() for "", should return 0, when target is H. But it returns "+freq); c++; }
+	    if(0 != freq) {System.out.println("frequency() for , should return 4, when taget is H. But it returns "+freq); c++; }
+	    //if(0 != freq) {System.out.println("frequency() for "", should return 0, when target is H. But it returns "+freq); c++; }
 	
 	    //notarget
 	    myObject = new Frequencer();
