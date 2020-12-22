@@ -70,13 +70,22 @@ public class Frequencer implements FrequencerInterface{
 
         // ここにコードを記述せよ
         //
-        String suffix_i = new String(Arrays.copyOfRange(mySpace, i, mySpace.length));
-        String suffix_j = new String(Arrays.copyOfRange(mySpace, j, mySpace.length));
-        int compare_result = suffix_i.compareTo(suffix_j);
-        if (compare_result > 0) {
+        byte[] suffix_i = Arrays.copyOfRange(mySpace, i, mySpace.length);
+        byte[] suffix_j = Arrays.copyOfRange(mySpace, j, mySpace.length);
+
+        for (int k = 0; k < suffix_i.length && k < suffix_j.length; k++) {
+            if (suffix_i[k] > suffix_j[k]) {
+                return 1;
+            }
+            else if (suffix_i[k] < suffix_j[k]) {
+                return -1;
+            }
+        }
+
+        if (suffix_i.length > suffix_j.length) {
             return 1;
         }
-        else if (compare_result < 0) {
+        else if (suffix_i.length < suffix_j.length) {
             return -1;
         }
         else {
@@ -195,7 +204,24 @@ public class Frequencer implements FrequencerInterface{
         //
         // ここに比較のコードを書け
         //
-        return 0; // この行は変更しなければならない。
+        byte[] suffix_i = Arrays.copyOfRange(mySpace, i, mySpace.length);
+        byte[] target_j_k = Arrays.copyOfRange(myTarget, j, k);
+
+        for (int l = 0; l < suffix_i.length && l < target_j_k.length; l++) {
+            if (suffix_i[l] > target_j_k[l]) {
+                return 1;
+            }
+            else if (suffix_i[l] < target_j_k[l]) {
+                return -1;
+            }
+        }
+
+        if (suffix_i.length < target_j_k.length) {
+            return -1;
+        }
+        else {
+            return 0;
+        }
     }
 
 
@@ -229,6 +255,12 @@ public class Frequencer implements FrequencerInterface{
         //
         // ここにコードを記述せよ。
         //
+        for (int i = 0; i < suffixArray.length; i++) {
+            if (targetCompare(suffixArray[i], start, end) == 0) {
+                return i;
+            }
+        }
+        
         return suffixArray.length; //このコードは変更しなければならない。
     }
 
@@ -261,6 +293,12 @@ public class Frequencer implements FrequencerInterface{
         //
         //　ここにコードを記述せよ
         //
+        for (int i = 0; i < suffixArray.length; i++) {
+            if (targetCompare(suffixArray[i], start, end) == 1) {
+                return i;
+            }
+        }
+
         return suffixArray.length; // この行は変更しなければならない、
     }
 
@@ -318,4 +356,3 @@ public class Frequencer implements FrequencerInterface{
         }
     }
 }
-
