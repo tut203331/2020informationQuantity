@@ -195,7 +195,18 @@ public class Frequencer implements FrequencerInterface{
         //
         // ここに比較のコードを書け
         //
-        return 0; // この行は変更しなければならない。
+        Byte[] suffix_i = Arrays.copyOfRange(mySpace, i, mySpace.length);
+	Byte[] target_j_k = Arrays.copyOfRange(myTarget, j, k);
+	
+	int comp = suffix_i.compareTo(target_j_k);
+
+	if (comp == 0)
+	    return 0;
+	else if (comp > 0)
+	    return 1;
+	else if (comp < 0)
+	    return -1; 	
+
     }
 
 
@@ -229,6 +240,7 @@ public class Frequencer implements FrequencerInterface{
         //
         // ここにコードを記述せよ。
         //
+	
         return suffixArray.length; //このコードは変更しなければならない。
     }
 
