@@ -35,7 +35,7 @@ public class TestCase {
 	c = 0;
 	try {
 	    FrequencerInterface  myObject;
-	    int freq;
+	    int freq, subbytefreq;
 		    c = 0;
 	    System.out.println("checking Frequencer");
 
@@ -68,7 +68,7 @@ public class TestCase {
 	    myObject.setTarget("m".getBytes());
 	    freq = myObject.frequency();
 	    subbytefreq = myObject.subByteFrequency(0,7);
-	    if(1 != subfreq) {System.out.println("frequency() for I am Jason Statham, should return 1, when target is m. But it returns "+freq); c++; }
+	    if(1 != subbytefreq) {System.out.println("frequency() for I am Jason Statham, should return 1, when target is m. But it returns "+freq); c++; }
 		
 	    // For the incorrect value of START or END, the behavior is undefined.
 	    myObject = new Frequencer();
@@ -76,7 +76,7 @@ public class TestCase {
 	    myObject.setTarget("m".getBytes());
 	    freq = myObject.frequency();
 	    subbytefreq = myObject.subByteFrequency(-10,100);
-	    if(-1 != subfreq) {System.out.println("frequency() for I am Jason Statham, should return -1, when target is m. But it returns "+freq); c++; }
+	    if(-1 != subbytefreq) {System.out.println("frequency() for I am Jason Statham, should return -1, when target is m. But it returns "+freq); c++; }
 
 	}
 	catch(Exception e) {
