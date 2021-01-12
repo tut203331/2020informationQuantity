@@ -118,7 +118,7 @@ public class Frequencer implements FrequencerInterface{
         //   suffixArray[ 1]= 1:BA
         //   suffixArray[ 2]= 0:CBA
         // のようになるべきである。
-
+	
         for (int i = 0; i < suffixArray.length - 1; i++) {
             for (int j = suffixArray.length - 1; j > i; j--) {
                 if (suffixCompare(suffixArray[j-1], suffixArray[j]) == 1) {
@@ -255,11 +255,28 @@ public class Frequencer implements FrequencerInterface{
         //
         // ここにコードを記述せよ。
         //
+
+	/*２分探索*/
+	int left = 0, right = suffixArray.length, mid;
+	while (left <= right) {
+	   mid = (left + right) / 2;
+           if(targetCompare(suffixArray[mid], start, end) == 0) {
+	      return mid;	
+	   }
+	   else if (targetCompare(suffixArray[mid], start, end) == 1) {
+	      right = mid - 1;
+	   }	  
+	   else if (targetCompare(suffixArray[mid], start, end) == -1) {
+	      left = mid + 1;
+	   }	
+	
+	}
+	/*
         for (int i = 0; i < suffixArray.length; i++) {
             if (targetCompare(suffixArray[i], start, end) == 0) {
                 return i;
             }
-        }
+        }*/
         
         return suffixArray.length; //このコードは変更しなければならない。
     }
@@ -292,15 +309,30 @@ public class Frequencer implements FrequencerInterface{
         // if target_start_end is"i", it will return 9 for "Hi Ho Hi Ho".
         //
         //　ここにコードを記述せよ
-        //
+        
+	/*2分探索*/
+	int left = 0, right = suffixArray.length, mid;
+	while (left <= right) {
+	   mid = (left + right) / 2;
+           if(targetCompare(suffixArray[mid], start, end) == 1) {
+	      return mid;	
+	   }
+	   else if (targetCompare(suffixArray[mid], start, end) == 0) {
+	      right = mid - 1;
+	   }	  
+	   else if (targetCompare(suffixArray[mid], start, end) == -1) {
+	      left = mid + 1;
+	   }
+/*
         for (int i = 0; i < suffixArray.length; i++) {
             if (targetCompare(suffixArray[i], start, end) == 1) {
                 return i;
             }
-        }
-
+        }*/
+	}
         return suffixArray.length; // この行は変更しなければならない、
-    }
+       
+   }
 
 
     // Suffix Arrayを使ったプログラムのホワイトテストは、
@@ -313,6 +345,7 @@ public class Frequencer implements FrequencerInterface{
     // 外部からFrequencerを使うときにメッセージを出力してはならない。
     // 教員のテスト実行のときにメッセージがでると、仕様にない動作をするとみなし、
     // 減点の対象である。
+    
     public static void main(String[] args) {
         Frequencer frequencerObject;
         try { // テストに使うのに推奨するmySpaceの文字は、"ABC", "CBA", "HHH", "Hi Ho Hi Ho".
