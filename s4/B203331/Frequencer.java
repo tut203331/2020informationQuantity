@@ -48,7 +48,7 @@ public class Frequencer implements FrequencerInterface{
 			}
 		}
 	}
-
+/*
 	private void insert(int a){
 		suffixArray[num++]=a;
 		int i=num,j=i/2;
@@ -60,10 +60,10 @@ public class Frequencer implements FrequencerInterface{
 			j = i/2;
 		}
 	}
-
+*/
 	/*
 	 *    * 先頭の要素を取り除き、返す
-	 *       */
+	 *       *//*
 	private int deletemin(){
 		int r=suffixArray[0];
 		suffixArray[0]=suffixArray[--num];
@@ -79,7 +79,8 @@ public class Frequencer implements FrequencerInterface{
 			j = i*2;
 		}
 		return r;
-	}
+	}*/
+	
 
 	private int suffixCompare(int i, int j) {
 		// suffixCompareはソートのための比較メソッドである。
@@ -124,6 +125,29 @@ public class Frequencer implements FrequencerInterface{
 			return 0;
 		}
 	}
+	
+	private void quick_sort(int[] data, int left, int right) {
+		if (left >= right)
+			return;
+		int p = data[(left+right) / 2];
+		int l = left, r = right, tmp;
+		while(l<=r) {
+           		while(suffixCompare(data[l], p) == -1) { 
+				l++; 
+			}
+            		while(suffixCompare(data[r], p) == 1) { 
+				r--; 
+			}
+            		if (l <= r) {
+                		tmp = data[l]; 
+				data[l] = data[r]; 
+				data[r] = tmp;
+                		l++; r--;
+            		}
+        	}
+        	quick_sort(data, left, r);  // ピボットより左側をクイックソート
+       	        quick_sort(data, l, right); // ピボットより右側をクイックソート
+	}
 
 	public void setSpace(byte []space) {
 		// suffixArrayの前処理は、setSpaceで定義せよ。
@@ -150,7 +174,7 @@ public class Frequencer implements FrequencerInterface{
 		//   suffixArray[ 1]= 1:BA
 		//   suffixArray[ 2]= 0:CBA
 		// のようになるべきである。
-
+	/*	
 		for (int i = 0; i < suffixArray.length - 1; i++) {
 			for (int j = suffixArray.length - 1; j > i; j--) {
 				if (suffixCompare(suffixArray[j-1], suffixArray[j]) == 1) {
@@ -159,7 +183,8 @@ public class Frequencer implements FrequencerInterface{
 					suffixArray[j] = tmp;
 				}
 			}
-		}
+		}*/
+		quick_sort(suffixArray, 0, space.length-1);
 	}
 
 	// ここから始まり、指定する範囲までは変更してはならないコードである。
