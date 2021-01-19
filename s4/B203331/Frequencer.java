@@ -318,23 +318,27 @@ public class Frequencer implements FrequencerInterface{
 		int left = 0, right = suffixArray.length-1, mid = (left + right) / 2;
 		while (left <= right) {
 			mid = (left + right) / 2;
-			if (mid == 0)
-				return 0;
-			if (mid == suffixArray.length-1)
-				return suffixArray.length;
+		//	if (mid == suffixArray.length-1)
+		//		return suffixArray.length;
 
 			if(targetCompare(suffixArray[mid], start, end) == 0) {
+				if (mid == 0)
+					return 0;
 				if(targetCompare(suffixArray[mid-1], start, end) != 0)
-				   return mid; 
+				   	return mid; 
 				right = mid - 1;	
 			}
 				
 			else if (targetCompare(suffixArray[mid], start, end) == 1) {
-				if(targetCompare(suffixArray[mid-1], start, end) == 0)
+				if (mid == suffixArray.length-1)
+					return suffixArray.length;
+				if(targetCompare(suffixArray[mid+1], start, end) == 0)
 					return mid+1;
 				right = mid - 1;
 			}	  
 			else if (targetCompare(suffixArray[mid], start, end) == -1) {
+				if (mid == suffixArray.length-1)
+					return suffixArray.length;
 				if(targetCompare(suffixArray[mid+1], start, end) == 0)
 					return mid+1;
 				left = mid + 1;
@@ -348,7 +352,7 @@ public class Frequencer implements FrequencerInterface{
 		   return i;
 		   }
 		   }*/
-		//return suffixArray.length;
+		//
 		return mid; //このコードは変更しなければならない。
 	}
 
@@ -386,22 +390,28 @@ public class Frequencer implements FrequencerInterface{
 		int left = 0, right = suffixArray.length-1, mid = (left + right) / 2;
 		while (left <= right) {
 			mid = (left + right) / 2;
-			if (mid == 0)
-				return 0;
-			if (mid == suffixArray.length-1)
-				return suffixArray.length;
+			//if (mid == 0)
+			//	return 0;
+			//if (mid == suffixArray.length-1)
+			//	return suffixArray.length;
 
 			if(targetCompare(suffixArray[mid], start, end) == 0) {
+				if (mid == suffixArray.length-1)
+					return suffixArray.length;
 				if(targetCompare(suffixArray[mid+1], start, end) != 0)
 					return mid+1;	
 				left = mid + 1;
 			}
 			else if (targetCompare(suffixArray[mid], start, end) == 1) {
+				if (mid == 0)
+					return 0;
 				if(targetCompare(suffixArray[mid-1], start, end) == 0)
 					return mid;
 				right = mid - 1;
 			}	  
 			else if (targetCompare(suffixArray[mid], start, end) == -1) {
+				if (mid == 0)
+					return 0;
 				if(targetCompare(suffixArray[mid-1], start, end) == 0)
 					return mid;
 				left = mid + 1;
@@ -414,7 +424,10 @@ public class Frequencer implements FrequencerInterface{
 			   }
 			   }
 		return suffixArray.length;*/
-		return mid; // この行は変更しなければならない、
+		if (mid == suffixArray.length-1)
+			return suffixArray.length;
+		else
+			return mid; //このコードは変更しなければならない。
 
 	}
 
