@@ -315,9 +315,11 @@ public class Frequencer implements FrequencerInterface{
 
 		/*２分探索*/
 		
-		int left = 0, right = suffixArray.length, mid = (left + right) / 2;
+		int left = 0, right = suffixArray.length-1, mid = (left + right) / 2;
 		while (left <= right) {
 			mid = (left + right) / 2;
+			if (mid == 0)
+				return 0;
 			if (mid == suffixArray.length-1)
 				return suffixArray.length;
 
@@ -328,26 +330,25 @@ public class Frequencer implements FrequencerInterface{
 			}
 				
 			else if (targetCompare(suffixArray[mid], start, end) == 1) {
-				if(targetCompare(suffixArray[mid+1], start, end) == 0)
+				if(targetCompare(suffixArray[mid-1], start, end) == 0)
 					return mid+1;
-
-				left = mid + 1;
+				right = mid - 1;
 			}	  
 			else if (targetCompare(suffixArray[mid], start, end) == -1) {
 				if(targetCompare(suffixArray[mid+1], start, end) == 0)
 					return mid+1;
-				right = mid - 1;
+				left = mid + 1;
 			}
 				
 
 		}
-		   /*	
+		 /*  	
 		   for (int i = 0; i < suffixArray.length; i++) {
 		   if (targetCompare(suffixArray[i], start, end) == 0) {
 		   return i;
 		   }
 		   }*/
-
+		//return suffixArray.length;
 		return mid; //このコードは変更しなければならない。
 	}
 
@@ -382,14 +383,16 @@ public class Frequencer implements FrequencerInterface{
 
 		/*2分探索*/
 		
-		int left = 0, right = suffixArray.length, mid = (left + right) / 2;
+		int left = 0, right = suffixArray.length-1, mid = (left + right) / 2;
 		while (left <= right) {
 			mid = (left + right) / 2;
+			if (mid == 0)
+				return 0;
 			if (mid == suffixArray.length-1)
 				return suffixArray.length;
 
 			if(targetCompare(suffixArray[mid], start, end) == 0) {
-				if(targetCompare(suffixArray[mid-1], start, end) != 0)
+				if(targetCompare(suffixArray[mid+1], start, end) != 0)
 					return mid+1;	
 				left = mid + 1;
 			}
@@ -404,13 +407,13 @@ public class Frequencer implements FrequencerInterface{
 				left = mid + 1;
 			}
 		}	
-			/*
+		/*	
 			   for (int i = 0; i < suffixArray.length; i++) {
 			   if (targetCompare(suffixArray[i], start, end) == 1) {
 			   return i;
 			   }
-			   }*/
-		
+			   }
+		return suffixArray.length;*/
 		return mid; // この行は変更しなければならない、
 
 	}
